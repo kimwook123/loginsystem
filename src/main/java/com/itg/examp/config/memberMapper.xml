@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<insert id="signup" parameterType="memb">
+		INSERT INTO member VALUES (null,#{mid},password(#{mpw}),#{name},#{age},#{address})
+	</insert>
+	<select id="signin" parameterType="string" resultType="memb">
+		SELECT mid,name,age,address FROM member where mid=#{mid} and mpw=password(#{mpw});
+	</select>
+	<select id="memberList" resultType="memb">
+		SELECT mid,name,age,address FROM member;
+	</select>
+</mapper>

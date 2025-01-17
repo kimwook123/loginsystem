@@ -1,22 +1,35 @@
 <!doctype html>
 <html>
-	<head>
-		<title>정보처리기사 로그인 시스템 구현하기</title>
-		<meta charset="utf-8"/>
-	</head>
-	<body>
-		<h2>정보처리기사 WAS 로그인 시스템 구현</h2>
-		<p>사용언어 : JAVA, Servlet, html, javascript, css, mybatis, mariadb</p>
-		<p>사용통합 툴 : eclipse spring suite 4, VSC</p>
-		<div>
-			<div>
-				<label>아이디</label><input type="text" /><br>
-				<label>비밀번호</label><input type="password" />
-			</div>
-			<div>
-				<button>로그인</button>
-			</div>
-			<p> <a href="#">회원가입</a> <a href="#">회원리스트보기</a></p>
-		</div>
-	</body>
+    <head>
+        <title>정보처리기사_로그인시스템구현하기</title>
+        <meta charset="utf-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h2>정보처리기사 WAS 로그인 시스템 구현</h2>
+        <p>사용언어 : JAVA, Servlet, html, javascript, css, mybatis, mariadb</p>
+        <p>사용통합툴 : eclipse spring suite 4, VSC </p>
+        <div id="container">
+            <div class="sp" style="float:left">
+                <p><label>아 이 디</label><input type="text" /></p>
+                <p><label>비밀번호</label><input type="password" /></p>
+            </div>
+            <div style="float:left;margin-top:1rem;margin-left:1rem">
+                <button style="width:6rem;height:3.8rem">로그인</button>
+            </div>
+            <p  class="sp" style="text-align:right;clear: both;"> <a href="signup.html">회원가입</a> <a href="#">회원리스트보기</a></p>
+        </div>
+    </body>
+    <script>
+    	let colors = ["red", "green", "blue", "orange", "gray", "Beige", "BlueViolet", "DarkKhaki"];
+		let r = parseInt(Math.random()*8)
+		$(function(){
+			$("body").css("background-color", colors[r])
+		})
+    </script>
+    <style>
+        #container{padding:0.5rem;width:25rem;height:8rem;}
+        p{margin-bottom:0.5rem}
+        label{display:inline-block;width:6rem}
+    </style>
 </html>

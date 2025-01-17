@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>로그인 시스템 회원가입</h2>
+    <form action="/member/signup" method="post">
+        <fieldset>
+            <legend>회원정보입력</legend>
+            <p>
+            <label>아이디</label>
+            <input type="text" id="mid" name="mid" />
+            </p>
+            <p>
+            <label>비밀번호</label>
+            <input type="password" id="mpx" name="mpw"/>
+            <label>비밀번호확인</label>
+            <input type="password" />
+            </p>
+            <p>
+            <label>이름</label>
+            <input type="text" name="name"/>
+            </p>
+            <p>
+            <label>나이</label>
+            <input type="number" name="age" />
+            </p>
+            <p>
+            <label>주소</label>
+            <input type="text" name="address" />
+            </p>
+            <hr>
+            <p>
+                <label>성별</label>
+                <label for="male">남</label>
+                <input id="male" type="radio" value="1" name="gender">
+                <label for="female">여</label>
+                <input id="female" type="radio" value="2" name="gender">
+            </p>
+            <p>
+                <label>취미</label>
+                <label>등산</label>
+                <input type="checkbox" value="m" name="hobby">
+                <label>낚시</label>
+                <input type="checkbox" value="f" name="hobby">
+                <label>볼링</label>
+                <input type="checkbox" value="b" name="hobby">
+            </p>
+
+            <p>
+            <label>직업</label>
+            <select name="myjob">
+                <option value="spo">스포츠</option>
+                <option value="gov">공무원</option>
+                <option value="edu">교육원</option>
+                <option value="job">직장인</option>
+            </select>
+            </p>
+        </fieldset>
+        <p id="btn_contain">
+            <input type="submit" value ="회원가입">
+            &nbsp;<input type="reset" value="다시입력"></p>
+    </form>
+    
+</body>
+<style>
+    label{display:inline-block;width:6rem;text-align:center;
+    margin: left 0.5rem;}
+    fieldset{width:50rem}
+    #btn_contain{width:50rem;text-align:center;}
+</style>
+</html>
