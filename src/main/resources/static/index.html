@@ -1,35 +1,54 @@
 <!doctype html>
 <html>
-    <head>
-        <title>정보처리기사_로그인시스템구현하기</title>
-        <meta charset="utf-8"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    </head>
-    <body>
-        <h2>정보처리기사 WAS 로그인 시스템 구현</h2>
-        <p>사용언어 : JAVA, Servlet, html, javascript, css, mybatis, mariadb</p>
-        <p>사용통합툴 : eclipse spring suite 4, VSC </p>
-        <div id="container">
-            <div class="sp" style="float:left">
-                <p><label>아 이 디</label><input type="text" /></p>
-                <p><label>비밀번호</label><input type="password" /></p>
-            </div>
-            <div style="float:left;margin-top:1rem;margin-left:1rem">
-                <button style="width:6rem;height:3.8rem">로그인</button>
-            </div>
-            <p  class="sp" style="text-align:right;clear: both;"> <a href="signup.html">회원가입</a> <a href="#">회원리스트보기</a></p>
-        </div>
-    </body>
-    <script>
-    	let colors = ["red", "green", "blue", "orange", "gray", "Beige", "BlueViolet", "DarkKhaki"];
-		let r = parseInt(Math.random()*8)
+	<head>
+		<title>정보처리기사_로그인시스템구현하기</title>
+		<meta charset="utf-8"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<h2>정보처리기사 WAS 로그인 시스템 구현</h2>
+		<p>사용언어 : JAVA, Servlet, html, javascript, css, mybatis, mariadb</p>
+		<p>사용통합툴 : eclipse spring suite 4, VSC </p>
+		<div id="container">
+			<div id="signinContain">
+				<div class="sp" style="float:left">
+					<p><label>아 이 디</label><input type="text" id="mid"/></p>
+					<p><label>비밀번호</label><input type="password" id="mpw"/></p>
+				</div>
+				<div style="float:left;margin-top:1rem;margin-left:1rem">
+					<button id="signin" style="width:6rem;height:3.8rem">로그인</button>
+				</div>
+				<p  class="sp" style="text-align:right;clear: both;"> <a href="signup.html">회원가입</a> &nbsp;&nbsp;&nbsp;<a style="display:none" id="listview" href="#">회원리스트보기</a></p>
+			</div>
+		</div>
+	</body>
+	<script>
+		let colors = ["red","green","blue","orange",
+			"gray","Beige","BlueViolet","DarkKhaki"];
+		let r = parseInt(Math.random()*8);
 		$(function(){
-			$("body").css("background-color", colors[r])
+		$("body").css("background-color",colors[r])
 		})
-    </script>
-    <style>
-        #container{padding:0.5rem;width:25rem;height:8rem;}
-        p{margin-bottom:0.5rem}
-        label{display:inline-block;width:6rem}
-    </style>
+		$("#signin").on("click",async()=>{
+			const logindata = {mid:$("#mid").val(),mpw:$("#mpw").val()}
+			const ctype = "application/json"
+			const res = await fetch("/member/login",{method:"post",headers:{"Content-type":ctype},body:JSON.stringify(logindata)})
+			const data = await res.json();
+			console.log(data)
+			if(data.message=="로그인성공"){
+				$("#signinContain").html(`
+					${data.mid}(${data.name})님 로그인 하신 걸 환영합니다.
+				`);
+				$("#listview").css("display","inline");
+			}else{
+				alert(data.message);
+			}
+			
+		})
+	</script>
+	<style>
+		#container{padding:0.5rem;width:25rem;height:8rem;}
+		p{margin-bottom:0.5rem}
+		label{display:inline-block;width:6rem}
+	</style>
 </html>
