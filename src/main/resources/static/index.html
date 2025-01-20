@@ -37,7 +37,7 @@
 			console.log(data)
 			if(data.message=="로그인성공"){
 				$("#signinContain").html(`
-					${data.mid}(${data.name})님 로그인 하신 걸 환영합니다.
+					${data.member.mid}(${data.member.name})님 로그인 하신 걸 환영합니다.
 				`);
 				$("#listview").css("display","inline");
 			}else{
