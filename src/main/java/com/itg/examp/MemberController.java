@@ -1,6 +1,7 @@
 package com.itg.examp;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,5 +71,17 @@ public class MemberController {
 	@GetMapping("/logout")
 	public void signout() {}
 	@GetMapping("/listview")
-	public void listView() {}
+	public Map listView(HttpServletRequest request) {
+		HttpSession auth = request.getSession();
+		HashMap<String, Object> hm = new HashMap<>();
+		if(auth==null) {
+			hm.put("message", "로그인을 먼저 해주세요.");
+		}else {
+			List<MemberDTO> ll = dao.memberList();
+			System.out.println(auth.getAttribute("mid")+"님이 회원 리스트 요구");
+			hm.put("message", "리스트수신");
+			hm.put("members", ll);
+		}
+		return hm;
+	}
 }

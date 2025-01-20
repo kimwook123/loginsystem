@@ -18,8 +18,13 @@
 				<div style="float:left;margin-top:1rem;margin-left:1rem">
 					<button id="signin" style="width:6rem;height:3.8rem">로그인</button>
 				</div>
-				<p  class="sp" style="text-align:right;clear: both;"> <a href="signup.html">회원가입</a> &nbsp;&nbsp;&nbsp;<a style="display:none" id="listview" href="#">회원리스트보기</a></p>
 			</div>
+			<p  class="sp" style="text-align:right;clear: both;"> <a href="signup.html">회원가입</a> &nbsp;&nbsp;&nbsp;<a style="display:none" id="listview" href="#">회원리스트보기</a></p>
+		</div>
+		<div id="listContain" style="display: none;">
+			<hr>
+			<p>회원 리스트 인원:<span id="mcnt"></span></p>
+			<div id="listindex"></div>
 		</div>
 	</body>
 	<script>
@@ -44,6 +49,21 @@
 				alert(data.message);
 			}
 			
+		})
+		$("#listview").click(async ()=>{
+			const res = await fetch("/member/listview",{headers:{method:"get"}})
+			const data = await res.json();
+			console.log(data)
+			if(data.message=="리스트수신"){
+				console.log(data.members);
+				$("#mcnt").text(data.members.length);
+				const viewText = data.members.map((obj)=>`<p style="border:1px solid gray;background:black;color:white">아이디:${obj.mid} 이름:${obj.name} 나이:${obj.age} 주소:${obj.address}</p>`)
+				console.log(viewText)
+				$("#listindex").html(viewText.join(""));
+				$("#listContain").css("display","block");
+			}else{
+				alert(data.message);
+			}
 		})
 	</script>
 	<style>
