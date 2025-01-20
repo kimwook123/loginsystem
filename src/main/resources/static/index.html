@@ -19,7 +19,7 @@
 					<button id="signin" style="width:6rem;height:3.8rem">로그인</button>
 				</div>
 			</div>
-			<p  class="sp" style="text-align:right;clear: both;"> <a href="signup.html">회원가입</a> &nbsp;&nbsp;&nbsp;<a style="display:none" id="listview" href="#">회원리스트보기</a></p>
+			<p  class="sp" style="text-align:right;clear: both;"> <a id="memcontrol" href="signup.html">회원가입</a> &nbsp;&nbsp;&nbsp;<a style="display:none" id="listview" href="#">회원리스트보기</a></p>
 		</div>
 		<div id="listContain" style="display: none;">
 			<hr>
@@ -45,6 +45,8 @@
 					${data.member.mid}(${data.member.name})님 로그인 하신 걸 환영합니다.
 				`);
 				$("#listview").css("display","inline");
+				$("#memcontrol").attr("href","/member/logout")
+					.text("로그아웃");
 			}else{
 				alert(data.message);
 			}
@@ -63,6 +65,16 @@
 				$("#listContain").css("display","block");
 			}else{
 				alert(data.message);
+			}
+		})
+		$("a").click(async function(evt){
+			if($(this).text()=="로그아웃"){
+				evt.preventDefault();
+				const res = await fetch($(this).attr("href"))
+				const data = await res.json();
+				alert(data.message)
+				location.href="/";
+				return false;
 			}
 		})
 	</script>
