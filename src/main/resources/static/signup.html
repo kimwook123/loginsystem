@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+
 <body>
-    <h2>로그인 시스템 회원가입</h2>
+    <h2>로그인 시스템 회원 가입</h2>
     <form id="memform">
         <fieldset>
             <legend>회원정보입력</legend>
             <p>
-            <label>아이디</label>
-            <input type="text" id="mid" name="mid" />
+                <label>아이디</label>
+                <input type="text" id="mid" name="mid" />
             </p>
             <p>
-            <label>비밀번호</label>
-            <input type="password" id="mpx" name="mpw"/>
-            <label>비밀번호확인</label>
-            <input type="password" />
+                <label>비밀번호</label>
+                <input type="password" id="mpw" name="mpw" />
+                <label>비밀번호확인</label>
+                <input type="password" />
             </p>
             <p>
-            <label>이름</label>
-            <input type="text" name="name"/>
+                <label>이름</label>
+                <input type="text" name="name" />
             </p>
             <p>
-            <label>나이</label>
-            <input type="number" name="age" />
+                <label>나이</label>
+                <input type="number" name="age" />
             </p>
             <p>
-            <label>주소</label>
-            <input type="text" name="address" />
+                <label>주소</label>
+                <input type="text" name="address" />
             </p>
             <hr>
             <p>
@@ -50,33 +52,34 @@
                 <label>볼링</label>
                 <input type="checkbox" value="b" name="hobby">
             </p>
-
             <p>
             <label>직업</label>
-            <select name="myjob">
-                <option value="spo">스포츠</option>
-                <option value="gov">공무원</option>
-                <option value="edu">교육원</option>
-                <option value="job">직장인</option>
-            </select>
+                <select name="myjob">
+                    <option value="spo">스포츠</option>
+                    <option value="gov">공무원</option>
+                    <option value="edu">교육원</option>
+                    <option value="job">직장인</option>
+                </select>
             </p>
         </fieldset>
         <p id="btn_contain">
-            <input type="submit" value ="회원가입">
-            &nbsp;<input type="reset" value="다시입력"></p>
+            <input type="submit" value="회원가입">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" value="다시입력">
+        </p>
+
     </form>
-    
 </body>
 <style>
     label{display:inline-block;width:6rem;text-align:center;
-    margin: left 0.5rem;}
+    margin-left:0.5rem}
     fieldset{width:50rem}
-    #btn_contain{width:50rem;text-align:center;}
+    #btn_contain{width:50rem;text-align: center;}
+    
 </style>
 <script>
 	$("#memform").on("submit",async (evt)=>{
-		evt.preventDefault(); // 기본 이벤트 제거
-		let payload = new FormData($("#memform")[0]) // UI 폼 데이터 수집
+		evt.preventDefault();// 기본이벤트 제거
+		let payload = new FormData($("#memform")[0])//ui폼데이터 수집
 		console.log(payload)
 		for(let key of payload.keys()){
 			console.log(key,":",payload.get(key));
@@ -84,18 +87,22 @@
 		if(!payload.get("age")){
 			payload.set("age","100");
 		}
-		// 서버로의 데이터 전송
-		const res = await fetch("/member/signup",{method:"post", body:payload});
-		// 서버에서의 응답까지의 약속
-		const data = await res.json(); // 서버에서 응답 시 json 데이터로 수신 
-		console.log(data)
-		if(data.message="회원가입성공"){
-			alert("회원가입 성공. 로그인 해주세요.")
+		//서버로의 데이터 전송
+		const res = await fetch("/member/signup",{method:"post",body:payload});
+		//promise 대기-서버응답시까지
+		const data = await res.json();//서버응답시 json 데이터로 수신
+		console.log(data.message)
+		if(data.message=="회원가입성공"){
+			alert("회원가입이 성공하였습니다. 다시 로그인 해주세요")
 			location.href="/"
 		}else{
-			alert("회원가입실패. 가입정보를 다시 확인하세요.")
+			alert(data.message)
 		}
 		return false;
 	})
 </script>
+
 </html>
+
+
+

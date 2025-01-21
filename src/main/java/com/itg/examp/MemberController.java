@@ -35,9 +35,11 @@ public class MemberController {
 		HashMap<String, Object> hm = new HashMap<>();
 		if(!ckid) {
 			hm.put("message", "아이디를 점검하세요");
+			return hm;
 		}
 		if(!ckpw) {
 			hm.put("message", "비밀번호를 점검하세요");
+			return hm;
 		}
 		int res = dao.signupMember(member);
 		if(res==1) {
